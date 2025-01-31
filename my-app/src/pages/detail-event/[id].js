@@ -44,19 +44,69 @@ const getById = async () => {
     }
 
 } 
+
+
+const handleOnSubmit = async (e) => {
+    e.preventDefault()
+    let inputUser = {
+    
+        search: inputSearch
+    }
+    
+    try {
+        const requestData = await fetch(`/api/event-bysearch?search=${inputSearch}`)
+        
+    const result = await requestData.json()
+    setDataEvent (result.data)
+    
+    } catch (error) {
+        
+    }
+    
+    
+    }
+    
+    
+    const handleInputText = (valueData) => {
+    
+        console.log(valueData,"==> req datanta");
+        setInputSearch(valueData)
+        
+    }
+    
+
+
+
+
     return (
 <>
 
-<h1>This DETAIL PAGE</h1>
-<Link href={`/home-page`}>Go to Home</Link>
+    <>
+    <nav className="navbar bg-body-tertiary">
+        <div className="container-fluid">
+            <a className="navbar-brand">Navbar</a>
+            <Link href={`/home-page`} passHref>
+             <button className="btn btn-primary me-4" >Home</button>
+            </Link>
+            {/* <Link href={`/home-page`}>Go to Home</Link> */}
+        </div>
+        </nav>
+    </>
+
+<h1 className ="text-center bg-info">Detail information</h1>
+{/* <Link href={`/home-page`}>Go to Home</Link> */}
 
 
-<p>Title        : {JSON.stringify(dataById.title)}</p>
-<p>Description  : {JSON.stringify(dataById.description)}</p>
+<div class="container text-center bg-warning">
+<img src={dataById.image} alt="Gambar 01"  style={{ height: '400px', width: '700px' }}  />
+
+<p className= "fw-bold fs-1">Title        : {JSON.stringify(dataById.title)}</p>
+<p className= "fs-5">Description  : {JSON.stringify(dataById.description)}</p>
 <p>Category  : {JSON.stringify(dataById.category)}</p>
 <p>Location  : {JSON.stringify(dataById.location)}</p>
 {/* <p>{JSON.stringify(dataById.image)}</p> */}
-{/* <img src="../public/image/book-fair.jpg" alt="Gambar 01" /> */}
+
+</div>
 
 
 

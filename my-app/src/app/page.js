@@ -1,95 +1,136 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+
+
+
+export default function HomePage() {
+const [dataEvent, setDataEvent] = useState([])
+const [inputSearch, setInputSearch] = useState("")
+
+useEffect ( () => {
+
+    getApi()
+},[])
+    
+const getApi = async () => {
+    try {
+        const data = await fetch("/api/event-detail")
+        const result = await data.json()
+
+        console.log(result,"ini datanya ya");
+        setDataEvent(result.data)
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+} 
+
+
+const handleOnSubmit = async (e) => {
+e.preventDefault()
+let inputUser = {
+
+    search: inputSearch
+}
+
+try {
+    const requestData = await fetch(`/api/event-bysearch?search=${inputSearch}`)
+    
+const result = await requestData.json()
+setDataEvent (result.data)
+
+} catch (error) {
+    
+}
+
+
+}
+
+
+const handleInputText = (valueData) => {
+
+    console.log(valueData,"==> req datanta");
+    setInputSearch(valueData)
+    
+}
+
+    return (
+<>
+        <>
+        <nav className="navbar bg-body-tertiary">
+        <div className="container-fluid">
+            <a className="navbar-brand">Navbar</a>
+            <form onSubmit={handleOnSubmit} className="d-flex" role="search">
+            <input className="form-control me-2" type="search" onChange={e => handleInputText(e.target.value)} placeholder="Search" aria-label="Search"/>
+            {/* <button className="btn btn-outline-success" type="submit" onSubmit={handleOnSubmit} >Search</button> */}
+             <input type= "submit" value={"Search"}/>
+            </form>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        </nav>
+
+
+        </>
+     
+
+
+<h1 className ="text-center bg-info">Home Page Project</h1>
+
+<form  className = "text-center"onSubmit={handleOnSubmit}>
+        {/* <label>search</label> */}
+        <input
+            type="text"
+            onChange={e => handleInputText(e.target.value)}
+        />
+
+        <input className="bg-info" type="submit" value="seach here.."/>
+</form>
+
+<br></br>
+
+    {/* <ul> */}
+        {
+            dataEvent.map(el => (
+                <>
+   {/* {const image = '/path/to/your/image.jpg'} */}
+                    <div className="card d-inline-flex bg-warning mb-3" style={{height: '25rem', width: '25rem',marginLeft: '50px' }}>
+                        <img 
+                            src={el.image} 
+                            className="card-img-top" 
+                            alt="..."
+                            style={{ height: '250px', objectFit: 'cover' }} // Mengatur tinggi dan proporsional gambar
+                        /> 
+                    <div className="card-body">
+                        <h5 className="card-title">{el.title}</h5>
+                        <p className="card-text">{el.description}</p>
+                        <Link href={`/detail-event/${el.id}`}>Go to detail</Link>
+                        {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
+                    </div>
+                    </div>
+               
+                     {/* <li key={el.id} >{el.title}</li> */}
+                   {/* <Link href={`/detail-event/${el.id}`}>Go to detail</Link> */}
+
+                </>
+               
+            ))
+
+        }
+        
+    {/* </ul> */}
+
+
+         
+
+</>
+
+
+    )
+
+
 }

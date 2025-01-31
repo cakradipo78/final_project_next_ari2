@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 
@@ -59,52 +60,59 @@ const handleInputText = (valueData) => {
 
     return (
 <>
-        {/* <>
+        <>
         <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
             <a className="navbar-brand">Navbar</a>
-            <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button className="btn btn-outline-success" type="submit">Search</button>
+            <form onSubmit={handleOnSubmit} className="d-flex" role="search">
+            <input className="form-control me-2" type="search" onChange={e => handleInputText(e.target.value)} placeholder="Search" aria-label="Search"/>
+            {/* <button className="btn btn-outline-success" type="submit" onSubmit={handleOnSubmit} >Search</button> */}
+             <input type= "submit" value={"Search"}/>
             </form>
         </div>
         </nav>
 
 
         </>
-      */}
+     
 
 
-<h1>This is Home Page</h1>
+<h1 className ="text-center bg-info">Home Page Project</h1>
 
-<form onSubmit={handleOnSubmit}>
-        <label>search</label>
+<form  className = "text-center"onSubmit={handleOnSubmit}>
+        {/* <label>search</label> */}
         <input
             type="text"
             onChange={e => handleInputText(e.target.value)}
         />
 
-        <input type="submit" value="seach ya"/>
+        <input className="bg-info" type="submit" value="seach here.."/>
 </form>
 
+<br></br>
 
-
-    <ul>
+    {/* <ul> */}
         {
             dataEvent.map(el => (
                 <>
-
-<div class="card" style="width: 18rem;">
-  {/* <img src="..." class="card-img-top" alt="..."/> */}
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
-  </div>
-</div>
+   {/* {const image = '/path/to/your/image.jpg'} */}
+                    <div className="card d-inline-flex bg-warning" style={{height: '25rem', width: '18rem',marginLeft: '50px' }}>
+                        <img 
+                            src={el.image} 
+                            className="card-img-top" 
+                            alt="..."
+                            style={{ height: '250px', objectFit: 'cover' }} // Mengatur tinggi dan proporsional gambar
+                        /> 
+                    <div className="card-body">
+                        <h5 className="card-title">{el.title}</h5>
+                        <p className="card-text">{el.description}</p>
+                        <Link href={`/detail-event/${el.id}`}>Go to detail</Link>
+                        {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
+                    </div>
+                    </div>
                
-                     <li key={el.id} >{el.title}</li>
-                   <Link href={`/detail-event/${el.id}`}>Go to detail</Link>
+                     {/* <li key={el.id} >{el.title}</li> */}
+                   {/* <Link href={`/detail-event/${el.id}`}>Go to detail</Link> */}
 
                 </>
                
@@ -112,7 +120,7 @@ const handleInputText = (valueData) => {
 
         }
         
-    </ul>
+    {/* </ul> */}
 
 
          
