@@ -79,7 +79,7 @@ const handleInputText = (valueData) => {
      
 
 
-<h1 className ="text-center bg-info">Home Page Project</h1>
+<h1 className ="text-center bg-info">Home Page Project arroy</h1>
 
 <form  className = "text-center"onSubmit={handleOnSubmit}>
         {/* <label>search</label> */}
@@ -96,9 +96,9 @@ const handleInputText = (valueData) => {
     {/* <ul> */}
         {
             dataEvent.map(el => (
-                <>
-   {/* {const image = '/path/to/your/image.jpg'} */}
-                    <div className="card d-inline-flex bg-warning mb-3" style={{height: '25rem', width: '25rem',marginLeft: '50px' }}>
+                <div className="d-inline-flex" key={el.id}>
+ 
+                    <div  className="card  bg-warning mb-3" style={{height: '25rem', width: '25rem',marginLeft: '50px' }}>
                         <img 
                             src={el.image} 
                             className="card-img-top" 
@@ -116,7 +116,7 @@ const handleInputText = (valueData) => {
                      {/* <li key={el.id} >{el.title}</li> */}
                    {/* <Link href={`/detail-event/${el.id}`}>Go to detail</Link> */}
 
-                </>
+                </div>
                
             ))
 
