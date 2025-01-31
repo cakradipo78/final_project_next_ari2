@@ -98,7 +98,7 @@ const handleInputText = (valueData) => {
             dataEvent.map(el => (
                 <div className="d-inline-flex" key={el.id}>
  
-                    <div  className="card  bg-warning mb-3" style={{height: '25rem', width: '25rem',marginLeft: '50px' }}>
+                    <div  className="card  bg-warning mb-3" style={{height: '25rem', width: '23rem',marginLeft: '50px' }}>
                         <img 
                             src={el.image} 
                             className="card-img-top" 
