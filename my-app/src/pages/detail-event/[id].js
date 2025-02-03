@@ -97,12 +97,14 @@ const handleOnSubmit = async (e) => {
 {/* <Link href={`/home-page`}>Go to Home</Link> */}
 
 
-<div class="container text-center bg-warning">
+
+<div className="container text-center bg-warning">
 <img src={dataById.image} alt="Gambar 01"  style={{ height: '400px', width: '700px' }}  />
 
 <p className= "fw-bold fs-1">Title        : {JSON.stringify(dataById.title)}</p>
 <p className= "fs-5">Description  : {JSON.stringify(dataById.description)}</p>
 <p>Category  : {JSON.stringify(dataById.category)}</p>
+<p>Date  : {JSON.stringify(dataById.date)}</p>
 <p>Location  : {JSON.stringify(dataById.location)}</p>
 {/* <p>{JSON.stringify(dataById.image)}</p> */}
 

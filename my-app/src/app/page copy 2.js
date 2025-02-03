@@ -1,6 +1,9 @@
+"use client";
+
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Head from "next/head";
 
 
 
@@ -59,7 +62,11 @@ const handleInputText = (valueData) => {
 }
 
     return (
+
+
+      
 <>
+
         <>
         <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
@@ -77,7 +84,7 @@ const handleInputText = (valueData) => {
      
 
 
-<h1 className ="text-center bg-info">Home Page Project ari</h1>
+<h1 className ="text-center bg-info">Home Page Project arroy</h1>
 
 <form  className = "text-center"onSubmit={handleOnSubmit}>
         {/* <label>search</label> */}
@@ -117,7 +124,6 @@ const handleInputText = (valueData) => {
                 </div>
                
             ))
-
 
         }
         
